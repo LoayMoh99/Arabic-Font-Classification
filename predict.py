@@ -16,14 +16,20 @@ import pickle
 import os
 import sys
 from contextlib import redirect_stdout
+import time
 
-# Writout function
 
-def result_file(prediction,Out):
-    with  open(Out +'.txt','w') as outfile:
+def result_file(prediction,calc_time,Out):
+
+    with  open(Out +'time.txt','w') as outfile:
+        with redirect_stdout(outfile):
+            for c in calc_time:
+                print(c)
+
+    with  open(Out +'results.txt','w') as outfile:
         with redirect_stdout(outfile):
             for p in prediction:
-                print(p+1)
+                print(p[0]+1)
                 
             
 
@@ -114,32 +120,54 @@ if os.path.exists(TestDetDir):
     AC_DIR = os.path.basename(TestDetDir)
     OUT_DIR = os.path.basename(OutDir)
     print (AC_DIR,'-',OUT_DIR,'  ',TestDetDir,'-',OutDir)
+
 print('----------------------------------------------------------------')
 # file exists
 # Reading Dataset
 x_test=[]
 
-for filename in sorted(glob.glob(TestDetDir+'/*.png')):
+for filename in sorted(glob.glob(TestDetDir+'*.png')):
     img = cv2.imread(filename) ## cv2.imread reads images in RGB format
     x_test.append(img)
-    print(filename+'heheeeeeeeeeeeeeeeeeeeeeeee')
+    print(filename+'heh')
 #estelam el dump
 
 filename = 'finalized_model.sav'
 loaded_model = pickle.load(open(filename, 'rb'))
 x_test = np.array(x_test)
 preprocessed_x = []
+
+## Getitng time
+
+prediction = []
+calc_time = []
 for i in range(x_test.shape[0]):
-    preprocessed_img = preprocess(x_test[i])
-    preprocessed_x.append(preprocessed_img)
+    ## starting time
+    start = time.time()
+    try:
+        preprocessed_img = preprocess(x_test[i])
+        features_x = lpq(preprocessed_img)
+        prediction.append(loaded_model.predict(np.array(features_x).reshape(1,-1))) 
+        # end time
+        end = time.time()
+        calc_t = round(end-start,2)
+        if(calc_t != 0):
+            calc_time.append(calc_t)
+        else:
+            calc_time.append(0.01)
+    except:
+        end = time.time()
+        calc_t = round(end-start,2)
+        if(calc_t != 0):
+            calc_time.append(calc_t)
+        else:
+            calc_time.append(0.01)
+        prediction.append([-2])
 
-preprocessed_x=np.asarray(preprocessed_x)
 
 
-features_x = [lpq(x) for x in preprocessed_x]
-features_x=np.array(features_x)
-prediction = loaded_model.predict(features_x)
+
 # result = loaded_model.score(test_y.reshape(-1,1), prediction)
-print('-----------------',prediction,)
-result_file(prediction,OutDir)
+print('-----------------',prediction,'\n',calc_time)
+result_file(prediction,calc_time,OutDir)
 
