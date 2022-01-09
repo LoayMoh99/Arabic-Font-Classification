@@ -21,7 +21,7 @@ import time
 
 def result_file(prediction,calc_time,Out):
 
-    with  open(Out +'time.txt','w') as outfile:
+    with  open(Out +'times.txt','w') as outfile:
         with redirect_stdout(outfile):
             for c in calc_time:
                 print(c)
