@@ -126,10 +126,11 @@ print('----------------------------------------------------------------')
 # Reading Dataset
 x_test=[]
 
-for filename in sorted(glob.glob(TestDetDir+'*.png')):
+for i in range(1,len(sorted(glob.glob(TestDetDir+'*.png')))+1):
+    filename = glob.glob(TestDetDir+str(i)+'.png')[0]
     img = cv2.imread(filename) ## cv2.imread reads images in RGB format
     x_test.append(img)
-    print(filename+'heh')
+    print(filename+' index: '+str(i))
 #estelam el dump
 
 filename = 'finalized_model.sav'
