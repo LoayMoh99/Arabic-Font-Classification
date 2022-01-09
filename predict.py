@@ -53,26 +53,21 @@ def preprocess(img):
 #-----------------------------------------------------------------------------------------------    #-----------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------    #-----------------------------------------------------------------------------------------------
 
-# Feature Extraction LPQ
 # LPQ "Local Phase Quantization" Feature Extraction:
-def lpq(img,winSize=5,freqestim=1,mode='nh'):
-    rho=0.90
+# Blurring insensitive
+def lpq(img,winSize=5):
 
     STFTalpha=1/winSize  # alpha in STFT approaches (for Gaussian derivative alpha=1)
-    sigmaS=(winSize-1)/4 # Sigma for STFT Gaussian window (applied if freqestim==2)
-    sigmaA=8/(winSize-1) # Sigma for Gaussian derivative quadrature filters (applied if freqestim==3)
-
     convmode='valid' # Compute descriptor responses only on part that have full neigborhood. Use 'same' if all pixels are included (extrapolates np.image with zeros).
 
     img=np.float64(img) # Convert np.image to double
     r=(winSize-1)/2 # Get radius from window size
     x=np.arange(-r,r+1)[np.newaxis] # Form spatial coordinates in window
 
-    if freqestim==1:  #  STFT uniform window
-        #  Basic STFT filters
-        w0=np.ones_like(x)
-        w1=np.exp(-2*np.pi*x*STFTalpha*1j)
-        w2=np.conj(w1)
+    #  STFT uniform window Basic STFT filters
+    w0=np.ones_like(x)
+    w1=np.exp(-2*np.pi*x*STFTalpha*1j)
+    w2=np.conj(w1)
 
     ## Run filters to compute the frequency response in the four points. Store np.real and np.imaginary parts separately
     # Run first filter
@@ -91,17 +86,11 @@ def lpq(img,winSize=5,freqestim=1,mode='nh'):
     inds = np.arange(freqResp.shape[2])[np.newaxis,np.newaxis,:]
     LPQdesc=((freqResp>0)*(2**inds)).sum(2)
 
-    ## Switch format to uint8 if LPQ code np.image is required as output
-    if mode=='im':
-        LPQdesc=np.uint8(LPQdesc)
-
     ## Histogram if needed
-    if mode=='nh' or mode=='h':
-        LPQdesc=np.histogram(LPQdesc.flatten(),range(256))[0]
+    LPQdesc=np.histogram(LPQdesc.flatten(),range(256))[0]
 
     ## Normalize histogram if needed
-    if mode=='nh':
-        LPQdesc=LPQdesc/LPQdesc.sum()
+    LPQdesc=LPQdesc/LPQdesc.sum()
 
     #print(LPQdesc)
     return LPQdesc
