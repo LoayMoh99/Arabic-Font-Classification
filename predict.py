@@ -57,6 +57,8 @@ def preprocess(img):
 # Blurring insensitive
 def lpq(img,winSize=5):
 
+    #using nh mode
+    
     STFTalpha=1/winSize  # alpha in STFT approaches (for Gaussian derivative alpha=1)
     convmode='valid' # Compute descriptor responses only on part that have full neigborhood. Use 'same' if all pixels are included (extrapolates np.image with zeros).
 
