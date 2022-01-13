@@ -4,24 +4,24 @@ This project is Arabic Font Identification System; that will be able to identify
 
 
 ## Project Pipeline
-1- Gathering Data: This step is crucial to any machine learning project; we start by
-gathering training data and test data.
-2- Data Preprocessing: To ensure that data is consistent and feature extraction and
-classification steps go smooth and unbiased, we must make some image processing to the
-data including denoising and binarization.
-3- Feature Extraction: This is a crucial step that is needed for classification, we use a
-texture descriptor technique called LPQ that tries to extract as many distinct features as
-possible for classification step.
-4- Feature Visualization: To ensure that the used feature extraction method is
-appropriate for the data, you should visualize it to see if the features are distinct enough
-or not (Is this method sufficient or should we use another one?).
-5- Classification (ML Model): This is the core element in the project, it’s what
-classifies or identifies a data and assigns it to a class, we used multiple classifiers to
-compare between them and choose what fits us best. The classifiers are KNN, Random
-Forest, SVM, and Neural Network.
-6- Performance Analysis: This is the moment of truth, where we evaluate each
-classification method used, we evaluate the accuracy, precision, recall, among other
-things. We take the best overall classification method to be used in our ML model.
+    1- Gathering Data: This step is crucial to any machine learning project; we start by
+    gathering training data and test data.
+    2- Data Preprocessing: To ensure that data is consistent and feature extraction and
+    classification steps go smooth and unbiased, we must make some image processing to the
+    data including denoising and binarization.
+    3- Feature Extraction: This is a crucial step that is needed for classification, we use a
+    texture descriptor technique called LPQ that tries to extract as many distinct features as
+    possible for classification step.
+    4- Feature Visualization: To ensure that the used feature extraction method is
+    appropriate for the data, you should visualize it to see if the features are distinct enough
+    or not (Is this method sufficient or should we use another one?).
+    5- Classification (ML Model): This is the core element in the project, it’s what
+    classifies or identifies a data and assigns it to a class, we used multiple classifiers to
+    compare between them and choose what fits us best. The classifiers are KNN, Random
+    Forest, SVM, and Neural Network.
+    6- Performance Analysis: This is the moment of truth, where we evaluate each
+    classification method used, we evaluate the accuracy, precision, recall, among other
+    things. We take the best overall classification method to be used in our ML model.
     
  
 ### Preprocessing Module:
