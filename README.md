@@ -84,25 +84,25 @@ Model selection is the step where classification of the font happens. We used 4 
 
   1- K-Nearest Neighbor (KNN).
   
-    ➢ KNN inspects the nearest K data points and classifies it as the class which
-  gathered the most votes.
+➢ KNN inspects the nearest K data points and classifies it as the class which
+gathered the most votes.
   
   2- Random Forest (RF).
-  
-    ➢ Random forest creates a multitude of trees and classifies a data point as the class
-    most voted by all the trees created.
+
+➢ Random forest creates a multitude of trees and classifies a data point as the class
+most voted by all the trees created.
     
   3- Support Vector Machine (SVM).
   
-    ➢ SVM is a supervised learning model that can make linear and non-linear
-    classifiers, it analyzes data for classification using learning algorithms associated
-    with it.
+➢ SVM is a supervised learning model that can make linear and non-linear
+classifiers, it analyzes data for classification using learning algorithms associated
+with it.
     
   4- Max Vote
   
-    ➢ Max voting is basically taking the best vote among several classifiers classifying
-    the same data sample, if the outputs of classifiers are label 1, label 2, label 1, then
-    label 1 would be the chosen classification.
+➢ Max voting is basically taking the best vote among several classifiers classifying
+the same data sample, if the outputs of classifiers are label 1, label 2, label 1, then
+label 1 would be the chosen classification.
     
 We used the 4 classifiers for comparison purposes and see which one fits the project best, the top performers were RF and SVM models.
 At the end we have chosen SVM as it gives the best accuracy / time combination.
