@@ -29,7 +29,7 @@ classification method used, we evaluate the accuracy, precision, recall, among o
 things. We take the best overall classification method to be used in our ML model.
     
  
-### Preprocessing Module:
+## Preprocessing Module:
 Data preprocessing is very simple here, since we have some restrictions on the input data (Images):
 
   1- Input image should be at Zero-degree orientation.
@@ -49,19 +49,19 @@ So, Data processing is just three steps:
   
   3- K-Folds
   
-What is K-Folds?
+#### What is K-Folds?
 
   K-folds is a resampling technique in machine learning that is used to make a
   model less biased while training on a limited dataset. It’s very useful when it
   comes to limited datasets just like ours (2000 data sample).
   
-What is K parameter in K-Folds?
+#### What is K parameter in K-Folds?
 
   The dataset is divided into K folds, where we train on K – 1 folds, then test on the
   one left, this process is randomized.
   
       
-### Feature Extraction/Selection:
+## Feature Extraction/Selection:
 Local Phase Quantization (LPQ) is the chosen method that is used in feature extraction. LPQ is a texture descriptor that is blur-insensitive, here is how it works:
 
   • At each pixel position x of the image, the local phase information computed over
@@ -79,7 +79,7 @@ Two simple reasons:
   
  
  
-### Model Selection/Training
+## Model Selection/Training
 Model selection is the step where classification of the font happens. We used 4 classification methods which are:
 
   1- K-Nearest Neighbor (KNN).
@@ -109,7 +109,7 @@ At the end we have chosen SVM as it gives the best accuracy / time combination.
 
 
 
-### Performance Analysis
+## Performance Analysis
 This is the moment of truth, we used the 3 classifiers KNN, RF, and SVM
 (there is another one that will be discussed later in the report) and we
 recorded the precision, recall, accuracy, and F1-Score.
@@ -134,7 +134,7 @@ Here is the performance analysis but with the neural network included:
 
 ![alt text](imgs/withNN.png)
 
-### Enhancements and Future Work
+## Enhancements and Future Work
 In general, by increasing the dataset size and varying its data, we should
 yield better and more accurate results.
 
